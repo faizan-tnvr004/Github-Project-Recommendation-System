@@ -2,7 +2,8 @@
 
 :root {
   --prs-sidebar-width: 240px;
-  --prs-content-max: 1200px;
+  /* Use full main-column width; padding on .prs-content / header keeps edges comfortable */
+  --prs-content-max: 100%;
   --prs-text: #0f1220;
   --prs-muted: #5c6478;
   --prs-border: #e4e7ef;

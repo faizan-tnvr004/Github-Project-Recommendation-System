@@ -3,19 +3,11 @@ import { Outlet } from 'react-router-dom'
 import { AppHeader } from '../components/layout/AppHeader'
 import { AppSidebar } from '../components/layout/AppSidebar'
 import './MainLayout.css'
-
-const THEME_KEY = 'prs-theme'
-
-function readStoredTheme() {
-  if (typeof window === 'undefined') return 'light'
-  const stored = localStorage.getItem(THEME_KEY)
-  if (stored === 'dark' || stored === 'light') return stored
-  return 'light'
-}
+import { applyThemeToDocument, readStoredTheme } from '../utils/theme.js'
 
 export function MainLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [theme, setTheme] = useState(readStoredTheme)
+  const [theme, setTheme] = useState(() => readStoredTheme())
 
   const closeSidebar = useCallback(() => setSidebarOpen(false), [])
   const toggleSidebar = useCallback(() => setSidebarOpen((o) => !o), [])
@@ -38,8 +30,7 @@ export function MainLayout() {
   }, [sidebarOpen])
 
   useEffect(() => {
-    document.documentElement.dataset.prsTheme = theme
-    localStorage.setItem(THEME_KEY, theme)
+    applyThemeToDocument(theme)
   }, [theme])
 
   useEffect(() => {

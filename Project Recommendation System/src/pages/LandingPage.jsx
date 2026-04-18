@@ -4,23 +4,14 @@ import { FeatureSection } from '../components/landing/FeatureSection'
 import { TestimonialsSection } from '../components/landing/TestimonialsSection'
 import { FooterSection } from '../components/landing/FooterSection'
 import './LandingPage.css'
-
-const THEME_KEY = 'projectmatch-theme'
-
-function readStoredTheme() {
-  if (typeof window === 'undefined') return 'light'
-  const stored = localStorage.getItem(THEME_KEY)
-  if (stored === 'dark' || stored === 'light') return stored
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-}
+import { applyThemeToDocument, readStoredTheme } from '../utils/theme.js'
 
 export function LandingPage() {
-  const [theme, setTheme] = useState(readStoredTheme)
+  const [theme, setTheme] = useState(() => readStoredTheme())
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
   useEffect(() => {
-    document.documentElement.dataset.pmTheme = theme
-    localStorage.setItem(THEME_KEY, theme)
+    applyThemeToDocument(theme)
   }, [theme])
 
   useEffect(() => {
