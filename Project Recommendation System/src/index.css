@@ -66,6 +66,15 @@ body {
   box-sizing: border-box;
 }
 
+/* When inside the app shell (MainLayout), use full-bleed layout. */
+#root.prs-root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-inline: 0;
+  text-align: initial;
+}
+
 h1,
 h2 {
   font-family: var(--heading);
