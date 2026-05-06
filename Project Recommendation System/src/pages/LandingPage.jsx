@@ -60,9 +60,9 @@ export function LandingPage() {
             >
               {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
             </button>
-            <a href="#contact" className="pm-link-btn">
+            <Link to="/login" className="pm-link-btn">
               Sign In
-            </a>
+            </Link>
             <Link to="/onboarding" className="pm-btn pm-btn--solid">
               Get Started
             </Link>
@@ -95,9 +95,9 @@ export function LandingPage() {
           <a className="pm-drawer__link" href="#contact" onClick={closeMobile}>
             Contact
           </a>
-          <a href="#contact" className="pm-link-btn pm-drawer__link" onClick={closeMobile}>
+          <Link to="/login" className="pm-link-btn pm-drawer__link" onClick={closeMobile}>
             Sign In
-          </a>
+          </Link>
           <Link to="/onboarding" className="pm-btn pm-btn--solid pm-btn--block" onClick={closeMobile}>
             Get Started
           </Link>
