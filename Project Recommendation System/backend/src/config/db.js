@@ -4,14 +4,11 @@ export async function connectDB() {
   mongoose.set("strictQuery", true);
 
   const uri = process.env.MONGO_URI;
-
   if (!uri) {
-    const err = new Error(
-      "MONGO_URI is required. Add it to backend/.env (or use MongoDB Atlas)."
-    );
-    err.status = 500;
-    throw err;
-  
+    process.env.USE_MOCK_DATA = "true";
+    // eslint-disable-next-line no-console
+    console.log("MONGO_URI not set. Using mock project data mode.");
+    return;
   }
 
   try {
