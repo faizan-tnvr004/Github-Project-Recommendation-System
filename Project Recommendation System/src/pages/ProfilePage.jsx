@@ -43,11 +43,12 @@ export function ProfilePage() {
   const joinedDate = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
 
   return (
-    <>
-      <h1 className="prs-page-title">Profile</h1>
-      <p className="prs-page-lead">Your account information.</p>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70vh', padding: '2rem 1rem' }}>
+      <div style={{ width: '100%', maxWidth: 540 }}>
+      <h1 className="prs-page-title" style={{ textAlign: 'center' }}>Profile</h1>
+      <p className="prs-page-lead" style={{ textAlign: 'center' }}>Your account information.</p>
 
-      <div style={{ maxWidth: 540 }}>
+      <div>
         {/* Avatar + name */}
         <div style={{
           display: 'flex', alignItems: 'center', gap: '1.25rem',
@@ -100,6 +101,7 @@ export function ProfilePage() {
           Sign out
         </button>
       </div>
-    </>
+      </div>
+    </div>
   )
 }

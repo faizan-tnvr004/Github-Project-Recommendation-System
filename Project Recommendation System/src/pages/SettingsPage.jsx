@@ -57,11 +57,12 @@ export function SettingsPage() {
   }
 
   return (
-    <>
-      <h1 className="prs-page-title">Settings</h1>
-      <p className="prs-page-lead">Manage your app preferences.</p>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70vh', padding: '2rem 1rem' }}>
+      <div style={{ width: '100%', maxWidth: 560 }}>
+      <h1 className="prs-page-title" style={{ textAlign: 'center' }}>Settings</h1>
+      <p className="prs-page-lead" style={{ textAlign: 'center' }}>Manage your app preferences.</p>
 
-      <div style={{ maxWidth: 560 }}>
+      <div>
         {/* Appearance */}
         <h2 style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--prs-muted)', margin: '0 0 0.5rem' }}>
           Appearance
@@ -100,6 +101,7 @@ export function SettingsPage() {
           </SettingRow>
         </div>
       </div>
-    </>
+      </div>
+    </div>
   )
 }
