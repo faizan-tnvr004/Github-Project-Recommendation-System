@@ -93,6 +93,7 @@ export function OnboardingPage() {
 
   const back = () => {
     if (step > 1) setStep((s) => s - 1)
+    else navigate('/')
   }
 
   return (
@@ -287,7 +288,7 @@ export function OnboardingPage() {
         )}
 
         <div className="pm-setup__footer">
-          <button type="button" className="pm-setup__back" onClick={back} disabled={step === 1}>
+          <button type="button" className="pm-setup__back" onClick={back}>
             Back
           </button>
           <button

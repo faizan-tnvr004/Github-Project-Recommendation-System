@@ -1,18 +1,24 @@
-import { Link } from "react-router-dom";
-import { RecommendationBanner } from "../components/project/RecommendationBanner";
-import { ProjectCard } from "../components/project/ProjectCard";
-import { getRecommended, projects } from "../data/projects";
-import FAQSection from "../components/landing/FAQSection";
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { RecommendationBanner } from '../components/project/RecommendationBanner'
+import { ProjectCard } from '../components/project/ProjectCard'
+import { getRecommended, projects } from '../data/projects'
+import { readSavedProjectIds, toggleSavedProject } from '../utils/savedProjects'
+import { useAuth } from '../context/AuthContext'
+import FAQSection from '../components/landing/FAQSection'
 
 export function HomePage() {
-  const top = getRecommended(3);
+  const { user } = useAuth()
+  const top = getRecommended(3)
+  const [savedIds, setSavedIds] = useState(() => readSavedProjectIds())
 
   return (
     <>
-      <h1 className="prs-page-title">Overview</h1>
+      <h1 className="prs-page-title">
+        {user?.name ? `Welcome, ${user.name.split(' ')[0]}` : 'Overview'}
+      </h1>
       <p className="prs-page-lead">
-        Curated project briefs ranked for your team. Start from top matches or
-        browse the full catalog.
+        Curated project briefs ranked for your team. Start from top matches or browse the full catalog.
       </p>
 
       <div className="prs-stats" aria-label="Summary">
@@ -25,43 +31,38 @@ export function HomePage() {
           <span className="prs-stat__label">Avg. fit (top 5)</span>
         </div>
         <div className="prs-stat">
-          <span className="prs-stat__value">12</span>
-          <span className="prs-stat__label">Saved this week</span>
+          <span className="prs-stat__value">{savedIds.length}</span>
+          <span className="prs-stat__label">Saved projects</span>
         </div>
       </div>
 
       <RecommendationBanner />
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          gap: "1rem",
-          flexWrap: "wrap",
-          marginBottom: "1rem",
-        }}
-      >
-        <h2
-          className="prs-page-title"
-          style={{ margin: 0, fontSize: "1.15rem" }}
-        >
+      <div style={{
+        display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
+        gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem',
+      }}>
+        <h2 className="prs-page-title" style={{ margin: 0, fontSize: '1.15rem' }}>
           Top matches
         </h2>
-        <Link to="/projects" className="prs-button prs-button--ghost">
-          Browse all
-        </Link>
+        <Link to="/projects" className="prs-button prs-button--ghost">Browse all</Link>
       </div>
 
       <div className="prs-grid prs-grid--tight">
         {top.map((p) => (
-          <ProjectCard key={p.id} project={p} />
+          <ProjectCard
+            key={p.id}
+            project={p}
+            saved={savedIds.includes(p.id)}
+            onToggleSaved={(id) => setSavedIds(toggleSavedProject(id))}
+            showScore
+          />
         ))}
       </div>
 
-      <div style={{ marginTop: "4rem" }}>
+      <div style={{ marginTop: '4rem' }}>
         <FAQSection />
       </div>
     </>
-  );
+  )
 }
