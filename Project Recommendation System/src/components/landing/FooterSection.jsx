@@ -1,21 +1,22 @@
+import { Link } from 'react-router-dom'
 import './FooterSection.css'
 
 const COLUMNS = [
   {
     title: 'Product',
-    links: ['Features', 'Pricing', 'Security', 'Roadmap'],
+    links: [{ label: 'Features', href: '#features' }, { label: 'Pricing', href: '#' }, { label: 'Security', href: '#' }, { label: 'Roadmap', href: '#' }],
   },
   {
     title: 'Company',
-    links: ['About', 'Blog', 'Careers', 'Press'],
+    links: [{ label: 'About', href: '#about' }, { label: 'Blog', href: '#' }, { label: 'Careers', href: '#' }, { label: 'Press', href: '#' }],
   },
   {
     title: 'Resources',
-    links: ['Documentation', 'Help Center', 'API Reference', 'Community'],
+    links: [{ label: 'Documentation', to: '/docs' }, { label: 'Help Center', href: '#' }, { label: 'API Reference', href: '#' }, { label: 'Community', href: '#' }],
   },
   {
     title: 'Legal',
-    links: ['Privacy', 'Terms', 'Cookie Policy', 'Licenses'],
+    links: [{ label: 'Privacy', href: '#' }, { label: 'Terms', href: '#' }, { label: 'Cookie Policy', href: '#' }, { label: 'Licenses', href: '#' }],
   },
 ]
 
@@ -55,11 +56,12 @@ export function FooterSection() {
               <section key={c.title} className="pm-final-footer__col" aria-label={c.title}>
                 <h3 className="pm-final-footer__col-title">{c.title}</h3>
                 <ul className="pm-final-footer__links">
-                  {c.links.map((label) => (
+                  {c.links.map(({ label, href, to }) => (
                     <li key={label}>
-                      <a className="pm-final-footer__link" href="#">
-                        {label}
-                      </a>
+                      {to
+                        ? <Link className="pm-final-footer__link" to={to}>{label}</Link>
+                        : <a className="pm-final-footer__link" href={href}>{label}</a>
+                      }
                     </li>
                   ))}
                 </ul>

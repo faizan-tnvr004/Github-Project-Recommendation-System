@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { api } from '../api'
 import { readSavedProjectIds, toggleSavedProjectId } from '../utils/savedProjects'
 
@@ -92,8 +92,10 @@ function SearchIcon() {
 }
 
 export function ProjectsPage() {
-  const [query, setQuery] = useState('')
-  const [debouncedQuery, setDebouncedQuery] = useState('')
+  const [searchParams] = useSearchParams()
+  const initialQ = searchParams.get('q') || ''
+  const [query, setQuery] = useState(initialQ)
+  const [debouncedQuery, setDebouncedQuery] = useState(initialQ)
   const [lang, setLang] = useState('Any')
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(false)

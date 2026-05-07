@@ -4,6 +4,7 @@ import { MainLayout } from './layouts/MainLayout'
 import { LandingPage } from './pages/LandingPage'
 import { LoginPage } from './pages/LoginPage'
 import { SignupPage } from './pages/SignupPage'
+import { DocsPage } from './pages/DocsPage'
 import { OnboardingPage } from './pages/OnboardingPage'
 import { HomePage } from './pages/HomePage'
 import { ProjectDetailPage } from './pages/ProjectDetailPage'
@@ -63,6 +64,7 @@ export default function App() {
             }
           />
           <Route path="onboarding" element={<OnboardingPage />} />
+          <Route path="docs" element={<DocsPage />} />
           <Route
             element={
               <RequireAuth>
